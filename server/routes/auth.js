@@ -25,7 +25,7 @@ router.post("/login", function(req, res, next) {
 
 router.post("/signup", (req, res, next) => {
 
-  const {username, password, course, campus} = req.body;
+  const {username, password} = req.body;
 
   if (!username || !password) {
     res.status(500).json({ message: 'Provide username and password' });
@@ -48,9 +48,7 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass,
-      course,
-      campus
+      password: hashPass
     });
 
     newUser.save(err => {
