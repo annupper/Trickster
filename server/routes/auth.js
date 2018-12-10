@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require('passport');
-const router = express.Router();
+const authRoutes = express.Router();
 const User = require("../models/User");
 
 // Bcrypt to encrypt passwords
@@ -8,9 +8,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-
-
-router.post("/login", function(req, res, next) {
+authRoutes.post("/login", function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return res.status(500).json({message: "Error login"}) }
     if (!user) { return res.status(500).json({message: "Error login"}) }
@@ -23,65 +21,53 @@ router.post("/login", function(req, res, next) {
 });
 
 
-router.post("/signup", (req, res, next) => {
+authRoutes.post("/signup", (req, res, next) => {
+  const { username, password } = req.body;
 
-  const {username, password} = req.body;
-
-  if (!username || !password) {
-    res.status(500).json({ message: 'Provide username and password' });
+  
+  if (username === "" || password === "") {
+    res.status(500).json({ message: "Indicate username and password" });
     return;
   }
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
-      res.status(500).json({ message: 'Username taken. Choose another one.' });
-            return;
-    }
-
-    if(err){
-      res.status(500).json({message: "Username check went bad."});
+      res.status(500).json({ message: "The username already exists" })
       return;
-  }
+    }
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
     });
 
-    newUser.save(err => {
+    newUser.save((err, user) => {
       if (err) {
-          res.status(400).json({ message: 'Saving user to database went wrong.' });
-          return;
-      }
-      
-      // Automatically log in user after sign up
-      // .login() here is actually predefined passport method
-      req.login(newUser, (err) => {
+        res.status(500).json({ message: "Something went wrong" });
+      } else {
+        req.login(user, (err) => {
 
           if (err) {
               res.status(500).json({ message: 'Login after signup went bad.' });
               return;
           }
-          // Send the user's information to the frontend
-          // We can use also: res.status(200).json(req.user);
-          res.status(200).json(newUser);
-      });
-  });
 
-  
-  
+          res.status(200).json(user);
+      });
+      }
+    });
   });
 });
 
-router.get("/logout", (req, res) => {
+authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.status(200).json({message: "Logout"});
 });
 
-router.get('/loggedin', (req, res) => {
+authRoutes.get('/loggedin', (req, res) => {
   if(req.isAuthenticated()) {
     return res.status(200).json(req.user);
   } else {
@@ -89,4 +75,4 @@ router.get('/loggedin', (req, res) => {
   }
 })
 
-module.exports = router;
+module.exports = authRoutes;
