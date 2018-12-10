@@ -1,6 +1,8 @@
 
 import React, { Component } from "react";
 import "./App.css";
+
+//import Navbar from "./components/navbar/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Message from "./components/Message";
@@ -59,6 +61,7 @@ class App extends Component {
           render={() => <Signup getUser={this.getUser} />}
         />
         <Route path="/login" render={() => <Login getUser={this.getUser} />} />
+
       </div>
     );
   }
