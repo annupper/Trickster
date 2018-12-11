@@ -2,10 +2,10 @@
 import React, { Component } from "react";
 import "./App.css";
 
-//import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import Message from "./components/Message";
+import HomeBody from "./components/homeBody/HomeBody";
 import AuthService from "./components/auth/AuthService";
 import { Route, Link } from "react-router-dom";
 
@@ -39,29 +39,16 @@ class App extends Component {
   };
 
   render() {
-    const welcome = this.state.user ? (
-      <div>
-        <p>Hola {this.state.user.username}</p>
-        <button onClick={this.logout}>Logout</button>
-      </div>
-    ) : (
-      <div>
-        <p>No user</p>
-        <Link to="/">Home</Link> - <Link to="/signup">Signup</Link> -{" "}
-        <Link to="/login">Login</Link>
-      </div>
-    );
-
+    
     return (
       <div className="App">
-        {welcome}
-        <Message user={this.state.user} />
-        <Route
-          path="/signup"
-          render={() => <Signup getUser={this.getUser} />}
-        />
-        <Route path="/login" render={() => <Login getUser={this.getUser} />} />
 
+        <Navbar user={this.state.user} logout={this.logout}/>
+        <Route exact
+          path="/signup"
+          render={() => <Signup getUser={this.getUser} />}/>
+        <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
+        <HomeBody />
       </div>
     );
   }

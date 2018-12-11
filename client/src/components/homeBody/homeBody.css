@@ -1,0 +1,10 @@
+.home-boxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.home-boxes div {
+  width: 20%;
+  margin: 20px;
+}

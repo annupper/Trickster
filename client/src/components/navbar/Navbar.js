@@ -1,36 +1,48 @@
 import React from 'react';
+import "./navbar.css"
 import { Link, Route,withRouter } from 'react-router-dom'
-import Signup from "../auth/Signup";
-import Login from "../auth/Login";
 
 class Navbar extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return (
-    
+    const navbar = this.props.user ? (
       <div>
+        <p>Hola {this.props.user.username}</p>
         <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
+          <button onClick={this.props.logout}>Logout</button>
           </li>
         </ul>
-        <hr/>
-        <Route
-          path="/signup"
-          render={() => <Signup getUser={this.getUser} />}/>
-        <Route path="/login" render={() => <Login getUser={this.getUser} />} />
+      </div>
+    ) : (
+      <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/signup">Signup</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+    </ul>
+    );
 
+    return (
+    
+      <div>
+        {navbar}
       </div>
  
     )
   }
 };
 
-//Navbar = withRouter(Navbar);
 export default Navbar;
