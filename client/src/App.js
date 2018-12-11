@@ -5,7 +5,9 @@ import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
+import Notes from "./components/notes/Notes";
 import HomeBody from "./components/homeBody/HomeBody";
+import NoteService from "./components/notes/NoteService";
 import AuthService from "./components/auth/AuthService";
 import { Route, Switch } from "react-router-dom";
 
@@ -17,6 +19,7 @@ class App extends Component {
       user: null
     };
 
+    this.noteService = new NoteService();
     this.authService = new AuthService();
 
     this.fetchUser();
@@ -52,6 +55,7 @@ class App extends Component {
           path="/signup"
           render={() => <Signup getUser={this.getUser} />}/>
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
+        <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
         </Switch>
       </div>
     );
