@@ -7,7 +7,7 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import HomeBody from "./components/homeBody/HomeBody";
 import AuthService from "./components/auth/AuthService";
-import { Route, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -44,11 +44,15 @@ class App extends Component {
       <div className="App">
 
         <Navbar user={this.state.user} logout={this.logout}/>
+        <Switch>
+        <Route exact
+          path="/"
+          render={() => <HomeBody />}/>
         <Route exact
           path="/signup"
           render={() => <Signup getUser={this.getUser} />}/>
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
-        <HomeBody />
+        </Switch>
       </div>
     );
   }

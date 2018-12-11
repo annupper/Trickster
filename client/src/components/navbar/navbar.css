@@ -1,0 +1,13 @@
+.navbarStyle ul {
+  list-style: none; /* Remove list bullets */
+    padding: 30px;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.navbarStyle ul li {
+  margin-left: 40px;
+  margin-right: 40px;
+}

@@ -3,13 +3,7 @@ import "./homeBody.css"
 
 class HomeBody extends React.Component {
 
-  constructor() {
-    super();
-  }
-
   render() {
- 
-
     return (
     
       <div className="homeBody">
