@@ -41,6 +41,7 @@ class Navbar extends React.Component {
     
       <div className="navbarStyle">
         {navbar}
+        <hr/>
       </div>
  
     )

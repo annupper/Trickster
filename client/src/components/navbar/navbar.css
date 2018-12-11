@@ -1,6 +1,7 @@
 .navbarStyle ul {
   list-style: none; /* Remove list bullets */
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 0px;
     margin: 0px;
     display: flex;
     flex-direction: row;
@@ -10,4 +11,9 @@
 .navbarStyle ul li {
   margin-left: 40px;
   margin-right: 40px;
+}
+
+.navbarStyle hr {
+  margin-bottom: 0px;
+  margin-top: 0px;
 }

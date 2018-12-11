@@ -4,7 +4,12 @@ const User = require("../models/User");
 const Note = require("../models/Note");
 
 noteRoutes.get("/notes", (req, res) => {
-  res.status(200).json({message: "Note"});
+  const user = req.user;
+  res.status(200).json(user);
+});
+
+noteRoutes.post("/notes", (req, res) =>{
+
 });
 
 
