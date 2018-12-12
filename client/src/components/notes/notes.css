@@ -11,6 +11,10 @@ flex-direction: column;
 margin: 0 auto;
 
 }
+
+.modifyNote {
+  width: 60%;
+}
 .userProfile {
   display: flex;
   background-color: #d4d8dd;
@@ -41,4 +45,9 @@ margin: 0 auto;
 .allNotes div {
   padding: 25px;
   border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.box-only-notes {
+  display: flex;
+  flex-direction: row;
 }

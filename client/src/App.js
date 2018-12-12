@@ -57,7 +57,10 @@ class App extends Component {
           render={() => <Signup getUser={this.getUser} />}/>
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
         <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
-        <Route exact path="/note/:id"  render={(match)=> <NoteDetail user={this.state.user} {...match}/>} />
+        <Route exact path="/note/:id"  render={(match)=> (<React.Fragment>
+          <Notes showNotes={this.showNotes} /> 
+          <NoteDetail user={this.state.user} {...match}/>
+        </React.Fragment>)} />
         </Switch>
       </div>
     );
