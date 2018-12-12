@@ -2,7 +2,6 @@
   list-style: none; /* Remove list bullets */
     padding-top: 30px;
     padding-bottom: 0px;
-    margin: 0px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -16,4 +15,8 @@
 .navbarStyle hr {
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.navbarStyle ul li a{
+  color: #828286;
 }

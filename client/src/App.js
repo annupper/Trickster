@@ -10,6 +10,7 @@ import HomeBody from "./components/homeBody/HomeBody";
 import NoteService from "./components/notes/NoteService";
 import AuthService from "./components/auth/AuthService";
 import { Route, Switch } from "react-router-dom";
+import NoteDetail from "./components/notes/NoteDetail";
 
 class App extends Component {
   constructor() {
@@ -56,6 +57,7 @@ class App extends Component {
           render={() => <Signup getUser={this.getUser} />}/>
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
         <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
+        <Route exact path="/note/:id"  render={(match)=> <NoteDetail user={this.state.user} {...match}/>} />
         </Switch>
       </div>
     );

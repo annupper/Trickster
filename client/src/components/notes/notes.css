@@ -3,3 +3,42 @@
   height: 60px;
   border-radius: 50%;
 }
+
+.notes {
+  width: 70%;
+display: flex;
+flex-direction: column;
+margin: 0 auto;
+
+}
+.userProfile {
+  display: flex;
+  background-color: #d4d8dd;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userNamePhoto {
+  display: flex;
+  flex-direction: row;
+}
+
+.userNamePhoto p {
+ margin-top: 20px;
+ margin-left: 20px;
+}
+
+.userProfileSettings {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.allNotes {
+  width: 300px;
+  text-align: start;
+}
+
+.allNotes div {
+  padding: 25px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}

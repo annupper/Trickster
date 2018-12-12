@@ -1,37 +1,44 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
-import "./notes.css"
+import ShowUserProfile from './ShowUserProfile';
+import ShowNotes from './ShowNotes';
+import NoteDetail from './NoteDetail';
+import { Link, Route } from 'react-router-dom';
+import "./notes.css";
 
 export default class Notes extends Component {
   constructor() {
     super();
 
     this.state = {
-      note: '',
+      note: null,
       user: null
     }
 
     this.noteService = new NoteService();
 
-      this.noteService
+    this.noteService
       .showNotes()
-      .then((user) => this.setState({...this.state, user}));
-    
+      .then((user) => this.setState({ ...this.state, user }));
+
+    this.noteService
+      .showNoteDetails()
+      .then((note) => this.setState({ ...this.state, note }));
+
   }
 
 
   render() {
     const showUsername = this.state.user ?
-    <div className="userProfile">
-      <img src={this.state.user.imgPath} alt=""/>
-      <p>{this.state.user.username}</p>
-    </div>
-    : <p></p>
+      <div>
+        <ShowUserProfile user={this.state.user} />
+        <ShowNotes user={this.state.user} />
+      </div>
+      : <p></p>;
+
     return (
       <div className="notes">
-        
         {showUsername}
-        
       </div>
     )
   }

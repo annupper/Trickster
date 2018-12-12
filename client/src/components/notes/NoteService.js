@@ -13,6 +13,11 @@ class NoteService {
     .then(response => response.data);
   }
 
+  showNoteDetails = (id) => {
+    return this.service.get(`/note/${id}`)
+    .then(response => response.data);
+  }
+
 }
 
 export default NoteService;

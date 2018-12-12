@@ -4,12 +4,36 @@ const User = require("../models/User");
 const Note = require("../models/Note");
 
 noteRoutes.get("/notes", (req, res) => {
-  const user = req.user;
-  res.status(200).json(user);
+  User.findById(req.user.id)
+  .populate('notes')
+  .then((user)=> {
+    res.status(200).json(user);
+  }).catch((err)=> console.log("Notes error"));
 });
 
-noteRoutes.post("/notes", (req, res) =>{
+noteRoutes.get("/note/:id", (req, res) => {
+  const noteId = req.params.id;
+  Note.findById(noteId)
+  .then(note => res.status(200).json(note))
+  .catch(err => console.log(`Here is the ${err}`));
+});
 
+
+noteRoutes.post("/notes", (req, res) =>{
+  //const author = req.user.id;
+  const {note} = req.body;
+
+  const newNote = new Note({
+    note
+  });
+
+  newNote.save((err, note) => {
+    if (err) {
+      res.status(500).json({ message: "Something went wrong" });
+    } else {
+        res.status(200).json(note);
+    }
+  });
 });
 
 

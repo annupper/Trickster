@@ -8,3 +8,9 @@
   width: 20%;
   margin: 20px;
 }
+
+.homeBody h1 {
+  font-weight: 800;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
