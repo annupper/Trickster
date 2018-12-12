@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import NoteService from './NoteService';
 import ShowUserProfile from './ShowUserProfile';
 import ShowNotes from './ShowNotes';
-import NoteDetail from './NoteDetail';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./notes.css";
 
 export default class Notes extends Component {
@@ -33,6 +32,7 @@ export default class Notes extends Component {
       <div>
         <ShowUserProfile user={this.state.user} />
         <ShowNotes user={this.state.user} />
+        <div className="allNotes"><div><Link to={`/note/createnote`}>Create note</Link></div></div>
       </div>
       : <p></p>;
 

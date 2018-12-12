@@ -19,21 +19,28 @@ noteRoutes.get("/note/:id", (req, res) => {
 });
 
 
-noteRoutes.post("/notes", (req, res) =>{
-  //const author = req.user.id;
-  const {note} = req.body;
-
+noteRoutes.post("/note/createnote", (req, res) =>{
+  const { note } = req.body;
+  console.log(note);
+  const author = req.user.id;
+  console.log(author);
   const newNote = new Note({
-    note
+    note,
+    author
   });
 
   newNote.save((err, note) => {
     if (err) {
       res.status(500).json({ message: "Something went wrong" });
     } else {
-        res.status(200).json(note);
+
+    res.status(200).json(note);
+    
     }
   });
+
+  
+
 });
 
 

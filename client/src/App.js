@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Notes from "./components/notes/Notes";
+import CreateNote from "./components/notes/CreateNote";
 import HomeBody from "./components/homeBody/HomeBody";
 import NoteService from "./components/notes/NoteService";
 import AuthService from "./components/auth/AuthService";
@@ -57,8 +58,9 @@ class App extends Component {
           render={() => <Signup getUser={this.getUser} />}/>
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
         <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
+        <Route exact path="/note/createnote" render={() => <CreateNote />} />
         <Route exact path="/note/:id"  render={(match)=> (<React.Fragment>
-          <Notes showNotes={this.showNotes} /> 
+        <Notes showNotes={this.showNotes} /> 
           <NoteDetail user={this.state.user} {...match}/>
         </React.Fragment>)} />
         </Switch>

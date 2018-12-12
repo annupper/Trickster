@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
-import ShowUserProfile from './ShowUserProfile';
-import AddToNote from './AddToNote';
-import ShowNotes from './ShowNotes';
 import "./notes.css"
 
 export default class NoteDetail extends Component {
@@ -34,7 +31,6 @@ export default class NoteDetail extends Component {
     return (
         <div className="modifyNote">
           {noteBody}
-          <AddToNote />
         </div>
     )
   }

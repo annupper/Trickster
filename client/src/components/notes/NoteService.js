@@ -18,6 +18,12 @@ class NoteService {
     .then(response => response.data);
   }
 
+  createNote = (note) => {
+    console.log(note);
+    return this.service.post('/note/createnote', note)
+    .then(response => response.data)
+  }
+
 }
 
 export default NoteService;
