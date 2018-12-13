@@ -17,6 +17,15 @@ export default class NoteDetail extends Component {
       .then((note) => this.setState({ ...this.state, note }));
   }
 
+  componentWillMount() {
+    this.unlisten = this.props.history.listen((location, action) => {
+      this.noteService = new NoteService();
+      this.noteService
+        .showNoteDetails(location.pathname.split("/")[2])
+        .then((note) => this.setState({ ...this.state, note }));
+    });
+  }
+
   render() {
     Moment.locale('es');
     const noteBody = this.state.note ?
@@ -29,10 +38,10 @@ export default class NoteDetail extends Component {
       :
       <p></p>
     return (
-        
-        <div className="modifyNote">
-          {noteBody}
-        </div>
+
+      <div className="modifyNote">
+        {noteBody}
+      </div>
     )
   }
 }
