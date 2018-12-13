@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import ShowUserProfile from './ShowUserProfile';
+import AuthService from '../auth/AuthService';
 import ShowNotes from './ShowNotes';
 import { Link } from 'react-router-dom';
 import "./notes.css";
@@ -11,21 +12,27 @@ export default class Notes extends Component {
 
     this.state = {
       note: null,
-      user: null
+      notes: null
     }
+
+    this.authService = new AuthService();
+
+    this.fetchUser();
 
     this.noteService = new NoteService();
 
-    this.noteService
-      .showNotes()
-      .then((user) => this.setState({ ...this.state, user }));
-
+   
     this.noteService
       .showNoteDetails()
       .then((note) => this.setState({ ...this.state, note }));
 
   }
 
+  fetchUser = () => {
+    this.authService
+      .loggedin()
+      .then(user => this.setState({ ...this.state, user }));
+  }
 
   render() {
     const showUsername = this.state.user ?

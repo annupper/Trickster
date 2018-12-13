@@ -59,7 +59,7 @@ class App extends Component {
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
         <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
         <Route exact path="/note/createnote" render={() => <CreateNote />} />
-        <Route exact path="/note/:id"  render={(match)=> (<React.Fragment>
+        <Route exact path="/notes/:id"  render={(match)=> (<React.Fragment>
         <Notes showNotes={this.showNotes} /> 
           <NoteDetail user={this.state.user} {...match}/>
         </React.Fragment>)} />

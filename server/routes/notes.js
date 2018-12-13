@@ -4,10 +4,9 @@ const User = require("../models/User");
 const Note = require("../models/Note");
 
 noteRoutes.get("/notes", (req, res) => {
-  User.findById(req.user.id)
-  .populate('notes')
-  .then((user)=> {
-    res.status(200).json(user);
+  Note.find({author: req.user.id})
+  .then((notes)=> {
+    res.status(200).json(notes);
   }).catch((err)=> console.log("Notes error"));
 });
 
@@ -20,27 +19,31 @@ noteRoutes.get("/note/:id", (req, res) => {
 
 
 noteRoutes.post("/note/createnote", (req, res) =>{
-  const { note } = req.body;
-  console.log(note);
+  const { title, note } = req.body;
   const author = req.user.id;
-  console.log(author);
   const newNote = new Note({
-    note,
-    author
+    title: req.body.title,
+    note: req.body.note,
+    author: author
   });
 
-  newNote.save((err, note) => {
-    if (err) {
-      res.status(500).json({ message: "Something went wrong" });
-    } else {
+  newNote.save().then(note => res.json(note))
 
-    res.status(200).json(note);
-    
+});
+
+noteRoutes.delete("/note", (req, res) => {
+  Note.findById(req.params.id)
+  .then(note => {
+    if (req.user.id === note.author){
+      note.delete()
+      .then(res.status(200).json(note))
+      .catch(err=> console.log(`Error while deleting note. Details: ${err}`))
+    }else{
+      return res.status(403).json({error: 'User not allowed to delete this note'});
     }
-  });
-
+  })
+  .catch(err => console.log(`Here is the ${err}`));
   
-
 });
 
 

@@ -18,9 +18,13 @@ class NoteService {
     .then(response => response.data);
   }
 
-  createNote = (note) => {
-    console.log(note);
-    return this.service.post('/note/createnote', note)
+  createNote = (title, note) => {
+    return this.service.post('/note/createnote', {title: title, note: note})
+    .then(response => response.data)
+  }
+
+  deleteNote = (noteId) => {
+    return this.service.delete(`/note/${noteId}`)
     .then(response => response.data)
   }
 

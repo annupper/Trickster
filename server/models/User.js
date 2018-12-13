@@ -14,11 +14,7 @@ const userSchema = new Schema({
   imgPath: {
     type: String,
     default: "https://res.cloudinary.com/dqlnv5tg8/image/upload/v1543153342/defaultProfile.png",
-  },
-  notes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Note',
-  }]
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
