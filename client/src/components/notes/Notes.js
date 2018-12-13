@@ -36,10 +36,10 @@ export default class Notes extends Component {
 
   render() {
     const showUsername = this.state.user ?
-      <div>
-        <ShowUserProfile user={this.state.user} />
+      <div className="notesAndCreate">
+        <div className="createNote"><div><Link to={`/note/createnote`}>Create note</Link></div></div>
         <ShowNotes user={this.state.user} />
-        <div className="allNotes"><div><Link to={`/note/createnote`}>Create note</Link></div></div>
+        
       </div>
       : <p></p>;
 

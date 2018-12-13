@@ -4,7 +4,17 @@ const Schema   = mongoose.Schema;
 const noteSchema = new Schema({
   title: {type: String},
   note: {type: String},
-  author: {type: Schema.Types.ObjectId, ref: 'User'}
+  author: {type: Schema.Types.ObjectId, ref: 'User'},
+  imgName: {
+    type: String,
+    default: 'defaultProfile.png',
+  },
+  imgName:[{
+    type: String
+  }],
+  imgPath:[{
+      type: String
+    }]
 }, {
   timestamps: {
     createdAt: 'created_at',

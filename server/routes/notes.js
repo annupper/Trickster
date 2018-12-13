@@ -14,7 +14,7 @@ noteRoutes.get("/note/:id", (req, res) => {
   const noteId = req.params.id;
   Note.findById(noteId)
   .then(note => res.status(200).json(note))
-  .catch(err => console.log(`Here is the ${err}`));
+  .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
 });
 
 
@@ -31,10 +31,11 @@ noteRoutes.post("/note/createnote", (req, res) =>{
 
 });
 
-noteRoutes.delete("/note", (req, res) => {
+noteRoutes.delete("/note/:id", (req, res) => {
   Note.findById(req.params.id)
   .then(note => {
-    if (req.user.id === note.author){
+    console.log(req.user._id, note.author, req.params.id)
+    if (req.user.id == note.author){
       note.delete()
       .then(res.status(200).json(note))
       .catch(err=> console.log(`Error while deleting note. Details: ${err}`))
@@ -42,7 +43,7 @@ noteRoutes.delete("/note", (req, res) => {
       return res.status(403).json({error: 'User not allowed to delete this note'});
     }
   })
-  .catch(err => console.log(`Here is the ${err}`));
+  .catch(err => console.log(`DELETE NOTE ${err}`));
   
 });
 

@@ -7,26 +7,39 @@ export default class ShowNotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: []
+      notes: [],
     }
 
 
     this.notes = [];
     this.noteService = new NoteService();
-    this.noteService
-    .showNotes()
-    .then((notes) => this.setState({notes:notes })  );
+    
+    this.getNotes()
+  }
 
+  getNotes = () => {
+    this.noteService
+      .showNotes()
+      .then((notes) => this.setState({ notes: notes }));
+  }
+
+  delete = (id) => {
+    this.noteService.deleteNote(id)
+    .then(()=> this.getNotes())
   }
 
 
   render() {
-    
-    var notes = this.state.notes;
-        var noteList = notes.map(function(note){
-                        return <div key={note._id}><Link to={`/notes/${note._id}`}>{note.title}</Link>  - <Link to={`/deletenote/${note._id}`}>Borrar</Link></div>;
-                      })
 
-        return  <div className="allNotes">{noteList}</div>
+
+    var notes = this.state.notes;
+    var noteList = notes.map( (note) =>{
+      let id = note._id
+      return <div key={note._id}>
+       <Link to={`/notes/${note._id}`}>{note.title}</Link>  <br/> <button onClick={()=> {this.delete(id)}}>Borrar</button> <br/> <Link to={`/edit/${note._id}`}>Edit</Link>
+        </div>;
+    })
+
+    return <div className="allNotes">{noteList}</div>
   }
 }
