@@ -23,8 +23,8 @@ class NoteService {
     .then(response => response.data);
   }
 
-  editNoteDetails = (id, title, noteText) => {
-    return this.service.post(`/edit/${id}`, {title: title, noteText: noteText, id: id})
+  editNoteDetails = ( title, noteText, id) => {
+    return this.service.post(`/edit`, {title: title, noteText: noteText, id:id})
     .then(response => response.data);
   }
 

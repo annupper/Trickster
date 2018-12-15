@@ -24,15 +24,32 @@ noteRoutes.get("/edit/:id", (req, res) => {
   .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
 });
 
-noteRoutes.post("/edit/:id", (req, res) => {
-  const { title, noteText, id } = req.body;
-  const noteId = req.params.id;
-  console.log(noteText, title, noteId);
+noteRoutes.post("/edit", (req, res) => {
+  var { title, noteText, id } = req.body;
+  console.log(noteText ,title, id);
 
-    Note.findById(noteId)
-    .then((note) => console.log(note.title))
-    .catch(err => console.log(`Here is the in edit noteTitle ${err}`));
-  
+  if(!title) {
+    Note.findById(id)
+  .then((note) => {
+    title = note.title;
+    console.log(title);
+})
+  .catch(err => console.log(err));
+  }
+
+  if(!noteText) {
+    Note.findById(id)
+  .then((note) => {
+    noteText = note.noteText;
+  console.log(noteText);
+})
+  .catch(err => console.log(err));
+  }
+
+    Note.findByIdAndUpdate(id, { $set :{ title: title, noteText: noteText }})
+  .then(note => res.status(200).json(note))
+  .catch(err => console.log(err));
+
 
 });
 

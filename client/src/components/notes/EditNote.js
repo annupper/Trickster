@@ -40,8 +40,8 @@ export default class EditNote extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     const id = this.props.match.params.id;
-    const {noteText, title} = this.state;
-    this.noteService.editNoteDetails(noteText, title, id)
+    const {title, noteText} = this.state;
+    this.noteService.editNoteDetails(title, noteText, id)
     .then(() => {
       this.setState({...this.state, redirect: true});
     })
