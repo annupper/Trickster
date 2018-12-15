@@ -39,16 +39,13 @@ export default class EditNote extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-
-    console.log(this.state.noteText);
-    console.log(this.props.match.params.id);
-
+    const id = this.props.match.params.id;
     const {noteText, title} = this.state;
-    /*this.noteService.editNoteDetails(title, note)
-    .then((note) => {
+    this.noteService.editNoteDetails(noteText, title, id)
+    .then(() => {
       this.setState({...this.state, redirect: true});
     })
-    .catch(err=>console.log(err)); */
+    .catch(err=>console.log(err)); 
   }
 
   handleChange = (e) => {

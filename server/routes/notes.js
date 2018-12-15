@@ -24,6 +24,18 @@ noteRoutes.get("/edit/:id", (req, res) => {
   .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
 });
 
+noteRoutes.post("/edit/:id", (req, res) => {
+  const { title, noteText, id } = req.body;
+  const noteId = req.params.id;
+  console.log(noteText, title, noteId);
+
+    Note.findById(noteId)
+    .then((note) => console.log(note.title))
+    .catch(err => console.log(`Here is the in edit noteTitle ${err}`));
+  
+
+});
+
 
 
 noteRoutes.post("/note/createnote", (req, res) =>{
