@@ -7,7 +7,8 @@ class HomeBody extends React.Component {
     return (
     
       <div className="homeBody">
-          <h1>ENOT</h1>
+        <div className="logoLine">
+        <img className="logoEnot" src="./logoEnot.png" alt=""/></div>
         <div className="home-boxes">
         <div>
           <h2>Captura</h2>

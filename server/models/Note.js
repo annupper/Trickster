@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const noteSchema = new Schema({
   title: {type: String},
-  note: {type: String},
+  noteText: {type: String},
   author: {type: Schema.Types.ObjectId, ref: 'User'},
   imgName: {
     type: String,

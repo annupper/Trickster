@@ -18,8 +18,18 @@ class NoteService {
     .then(response => response.data);
   }
 
-  createNote = (title, note) => {
-    return this.service.post('/note/createnote', {title: title, note: note})
+  showEditDetails = (id) => {
+    return this.service.get(`/edit/${id}`)
+    .then(response => response.data);
+  }
+
+  editNoteDetails = (id, title, noteText) => {
+    return this.service.post(`/edit/${id}`, {title: title, noteText: noteText, id: id})
+    .then(response => response.data);
+  }
+
+  createNote = (title, noteText) => {
+    return this.service.post('/note/createnote', {title: title, noteText: noteText})
     .then(response => response.data)
   }
 

@@ -15,9 +15,10 @@ export default class NoteDetail extends Component {
     this.noteService
       .showNoteDetails(props.match.params.id)
       .then((note) => this.setState({ ...this.state, note }));
+
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.unlisten = this.props.history.listen((location, action) => {
       this.noteService = new NoteService();
       this.noteService
@@ -26,17 +27,32 @@ export default class NoteDetail extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.setState({...this.state, note: null})
+ }
+
+
   render() {
     Moment.locale('es');
     const noteBody = this.state.note ?
       <div>
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('d MMM')}</p>
-        <p>{this.state.note.note}</p>
-
+        <p>{this.state.note.noteText}</p>
       </div>
       :
-      <p></p>
+      <p></p>;
+
+      const noteEditBody = this.state.note ?
+      <div>
+        <form>
+          <input type="text"  name="title" defaultValue={this.state.note.title}/><br/>
+          <textarea type="text" name="note" defaultValue={this.state.note.noteText} cols="60" rows="5" /><br/>
+          <input type="submit" value="Send"/>
+        </form>
+      </div>
+      :
+      <p></p>;
     return (
 
       <div className="modifyNote">

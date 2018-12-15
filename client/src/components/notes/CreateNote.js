@@ -8,7 +8,7 @@ export default class CreateNote extends Component {
     super()
 
     this.state = {
-      note: '',
+      noteText: '',
       title: '',
       redirect: false
     }
@@ -21,10 +21,10 @@ export default class CreateNote extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const {note, title} = this.state;
+    const {noteText, title} = this.state;
     //console.log(note);
-    this.noteService.createNote(title, note)
-    .then((note) => {
+    this.noteService.createNote(title, noteText)
+    .then(() => {
       this.setState({...this.state, redirect: true});
     })
     .catch(err=>console.log(err));
@@ -45,7 +45,7 @@ export default class CreateNote extends Component {
       <h2>Create note</h2>
         <form onSubmit={this.handleFormSubmit}>
           <label htmlFor="title">Title:</label><input type="text" onChange={e => this.handleChange(e)} name="title"/><br/>
-          <textarea type="text" name="note" onChange={e => this.handleChange(e)} cols="60" rows="5" /><br/>
+          <textarea type="text" name="noteText" onChange={e => this.handleChange(e)} cols="60" rows="5" /><br/>
           <input type="submit" value="Send"/>
         </form>
       </div>

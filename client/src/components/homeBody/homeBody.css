@@ -14,3 +14,17 @@
   margin-top: 60px;
   margin-bottom: 40px;
 }
+
+.logoEnot {
+  width: 200px;
+  height: 160px;
+}
+
+.logoLine {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}

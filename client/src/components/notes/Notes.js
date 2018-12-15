@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
-import ShowUserProfile from './ShowUserProfile';
 import AuthService from '../auth/AuthService';
 import ShowNotes from './ShowNotes';
 import { Link } from 'react-router-dom';

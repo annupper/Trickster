@@ -18,7 +18,6 @@ flex-direction: row;
 }
 
 .allNotes div {
-  width: 30%;
   margin: 20px;
   padding: 20px;
   background-color: rgb(238, 238, 238);

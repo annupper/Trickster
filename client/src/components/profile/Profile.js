@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import "./profile.css"
 
 export default class ShowNotes extends Component {
-  constructor() {
-    super();
-  }
   render() {
-
     return (
       <div className="profile">
         <div className="userNamePhoto">

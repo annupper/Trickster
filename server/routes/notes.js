@@ -17,13 +17,21 @@ noteRoutes.get("/note/:id", (req, res) => {
   .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
 });
 
+noteRoutes.get("/edit/:id", (req, res) => {
+  const noteId = req.params.id;
+  Note.findById(noteId)
+  .then(note => res.status(200).json(note))
+  .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
+});
+
+
 
 noteRoutes.post("/note/createnote", (req, res) =>{
-  const { title, note } = req.body;
+  //const { title, noteText } = req.body;
   const author = req.user.id;
   const newNote = new Note({
     title: req.body.title,
-    note: req.body.note,
+    noteText: req.body.noteText,
     author: author
   });
 
