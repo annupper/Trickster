@@ -28,11 +28,12 @@ class NoteService {
     .then(response => response.data);
   }
 
-  createNote = (title, noteText, photo) => {
+  createNote = (title, noteText, photo, sketch) => {
     const formData = new FormData();
     formData.append('photo', photo);
     formData.append('title', title);
     formData.append('noteText', noteText);
+    formData.append('sketch', sketch);
 
     return this.service.post('/note/createnote', formData, { headers: {
       "Content-Type": "multipart/form-data"

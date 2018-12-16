@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import {Redirect} from "react-router-dom";
+import ControlledPopup from "./popup/Popup.js";
 import "./notes.css"
 
 export default class CreateNote extends Component {
@@ -11,7 +12,8 @@ export default class CreateNote extends Component {
       noteText: '',
       title: '',
       photo: '',
-      redirect: false
+      redirect: false,
+      sketch:''
     }
 
     this.noteService = new NoteService();
@@ -22,9 +24,9 @@ export default class CreateNote extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const {noteText, title, photo} = this.state;
-    console.log(photo);
-    this.noteService.createNote(title, noteText, photo)
+    const {noteText, title, photo, sketch} = this.state;
+    
+    this.noteService.createNote(title, noteText, photo, sketch)
     .then(() => {
       this.setState({...this.state, redirect: true});
     })
@@ -40,6 +42,12 @@ export default class CreateNote extends Component {
     }
   }
 
+  onUpdate = (popupSketch) => {
+    this.setState({
+      sketch: popupSketch
+    })
+  };
+
   render() {
     if(this.state && this.state.redirect) {
       return <Redirect to="/notes" />
@@ -53,8 +61,11 @@ export default class CreateNote extends Component {
           <textarea type="text" name="noteText" onChange={e => this.handleChange(e)} cols="60" rows="5" /><br/>
           <label>Photo</label>
           <input type="file" name="photo" onChange={e => this.handleChange(e)} />
+          <input type="hidden" name="sketch" value={this.state.sketch} />
           <input type="submit" value="Send"/>
+          
         </form>
+        <ControlledPopup onUpdate={this.onUpdate} />
       </div>
     )
   }

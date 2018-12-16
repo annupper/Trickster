@@ -4,6 +4,7 @@ const Schema   = mongoose.Schema;
 const noteSchema = new Schema({
   title: {type: String},
   noteText: {type: String},
+  sketch: {type: String},
   author: {type: Schema.Types.ObjectId, ref: 'User'},
   imgName: {
     type: String,

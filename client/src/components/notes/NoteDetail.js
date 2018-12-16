@@ -37,8 +37,9 @@ export default class NoteDetail extends Component {
     const noteBody = this.state.note ?
       <div>
         <h3>{this.state.note.title}</h3>
-        <p>{Moment(this.state.note.created_at).format('d MMM')}</p>
+        <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
         <p>{this.state.note.noteText}</p>
+        <img src={this.state.note.sketch} alt="" />
         <img src={this.state.note.imgPath} alt="" />
       </div>
       :

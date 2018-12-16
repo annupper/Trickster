@@ -58,12 +58,12 @@ noteRoutes.post("/edit", (req, res) => {
 
 noteRoutes.post("/note/createnote", uploadCloud.single("photo"), (req, res) =>{
   const author = req.user.id;
-  const imgPath = req.file.url;
-  console.log(req.file);
-  const {title, noteText} = req.body;
+  const imgPath = req.file ? req.file.url : '';
+  const {title, noteText, sketch} = req.body;
   const newNote = new Note({
     title,
     noteText,
+    sketch,
     author: author,
     imgPath
   });
