@@ -2,6 +2,7 @@ const express = require("express");
 const noteRoutes = express.Router();
 const User = require("../models/User");
 const Note = require("../models/Note");
+const uploadCloud = require("../config/cloudinary");
 
 noteRoutes.get("/notes", (req, res) => {
   Note.find({author: req.user.id})
@@ -55,13 +56,16 @@ noteRoutes.post("/edit", (req, res) => {
 
 
 
-noteRoutes.post("/note/createnote", (req, res) =>{
-  //const { title, noteText } = req.body;
+noteRoutes.post("/note/createnote", uploadCloud.single("photo"), (req, res) =>{
   const author = req.user.id;
+  const imgPath = req.file.url;
+  console.log(req.file);
+  const {title, noteText} = req.body;
   const newNote = new Note({
-    title: req.body.title,
-    noteText: req.body.noteText,
-    author: author
+    title,
+    noteText,
+    author: author,
+    imgPath
   });
 
   newNote.save().then(note => res.json(note))

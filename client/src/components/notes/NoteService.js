@@ -28,8 +28,15 @@ class NoteService {
     .then(response => response.data);
   }
 
-  createNote = (title, noteText) => {
-    return this.service.post('/note/createnote', {title: title, noteText: noteText})
+  createNote = (title, noteText, photo) => {
+    const formData = new FormData();
+    formData.append('photo', photo);
+    formData.append('title', title);
+    formData.append('noteText', noteText);
+
+    return this.service.post('/note/createnote', formData, { headers: {
+      "Content-Type": "multipart/form-data"
+    }})
     .then(response => response.data)
   }
 

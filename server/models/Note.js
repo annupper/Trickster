@@ -12,9 +12,7 @@ const noteSchema = new Schema({
   imgName:[{
     type: String
   }],
-  imgPath:[{
-      type: String
-    }]
+  imgPath:{type: String}
 }, {
   timestamps: {
     createdAt: 'created_at',
