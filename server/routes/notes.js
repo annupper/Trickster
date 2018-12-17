@@ -25,6 +25,27 @@ noteRoutes.get("/edit/:id", (req, res) => {
   .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
 });
 
+noteRoutes.post("/share/:id", (req, res) => {
+  const noteId = req.params.id;
+  Note.findById(noteId)
+  .then((noteFound) => {if
+    (noteFound.author === req.user.id){
+      const {recipient} = req.body;
+      const {title, noteText, sketch} = noteFound;
+  const newNote = new Note({
+    title,
+    noteText,
+    sketch,
+    author: recipient,
+    imgPath
+  });
+
+  newNote.save().then(note => res.json(note))
+    }
+  })
+  .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
+});
+
 noteRoutes.post("/edit", (req, res) => {
   var { title, noteText, id } = req.body;
   console.log(noteText ,title, id);

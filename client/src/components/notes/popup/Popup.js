@@ -32,7 +32,7 @@ export default class ControlledPopup extends React.Component {
     return (
       <div>
         <button className="button" onClick={this.openModal}>
-          <i class="fa fa-paint-brush"></i>
+          <i className="fa fa-paint-brush"></i>
         </button>
         <Popup
           open={this.state.open}

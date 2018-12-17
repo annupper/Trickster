@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import { Link } from 'react-router-dom';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import "./notes.css"
 
 export default class ShowNotes extends Component {
@@ -44,7 +45,7 @@ export default class ShowNotes extends Component {
       return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
         <div className="showNoteTools"><button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> <br /> <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link></div>
         <Link to={`/notes/${note._id}`}>{note.title}</Link>
-        <p>{note.noteText}</p>
+        <p>{ ReactHtmlParser(note.noteText) }</p>
       </div>;
     })
 

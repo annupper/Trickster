@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
 import ControlledPopup from "./popup/Popup.js";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 import "./notes.css"
 
 export default class CreateNote extends Component {
@@ -13,7 +16,7 @@ export default class CreateNote extends Component {
       title: '',
       photo: '',
       redirect: false,
-      sketch:''
+      sketch: ''
     }
 
     this.noteService = new NoteService();
@@ -24,21 +27,21 @@ export default class CreateNote extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const {noteText, title, photo, sketch} = this.state;
-    
+    const { noteText, title, photo, sketch } = this.state;
+
     this.noteService.createNote(title, noteText, photo, sketch)
-    .then(() => {
-      this.setState({...this.state, redirect: true});
-    })
-    .catch(err=>console.log(err));
+      .then(() => {
+        this.setState({ ...this.state, redirect: true });
+      })
+      .catch(err => console.log(err));
   }
 
   handleChange = (e) => {
-    const {name, value} = e.target;
-    if(name == "photo") {
-      this.setState({...this.state, photo: e.target.files[0]})
+    const { name, value } = e.target;
+    if (name == "photo") {
+      this.setState({ ...this.state, photo: e.target.files[0] })
     } else {
-      this.setState({...this.state, [name]: value});
+      this.setState({ ...this.state, [name]: value });
     }
   }
 
@@ -48,24 +51,34 @@ export default class CreateNote extends Component {
     })
   };
 
+  onNoteTextChange = (text) => {
+    this.setState({
+      noteText: text
+    })
+  };
+
   render() {
-    if(this.state && this.state.redirect) {
+    if (this.state && this.state.redirect) {
       return <Redirect to="/notes" />
     }
 
+    
+
     return (
       <div className="notes">
-      <h2>Create note</h2>
+        <h2>Create note</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label htmlFor="title">Title:</label><input type="text" onChange={e => this.handleChange(e)} name="title"/><br/>
-          <textarea type="text" name="noteText" onChange={e => this.handleChange(e)} cols="60" rows="5" /><br/>
+          <label htmlFor="title">Title:</label><input type="text" onChange={e => this.handleChange(e)} name="title" /><br />
+          <ReactQuill theme="snow" value={this.state.noteText}
+                  onChange={this.onNoteTextChange} />
           <label>Photo</label>
           <input type="file" name="photo" onChange={e => this.handleChange(e)} />
           <input type="hidden" name="sketch" value={this.state.sketch} />
-          <input type="submit" value="Send"/>
-          
+          <input type="submit" value="Send" />
+
         </form>
         <ControlledPopup onUpdate={this.onUpdate} />
+        
       </div>
     )
   }

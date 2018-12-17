@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import {Redirect} from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 import "./notes.css"
 
 export default class EditNote extends Component {
@@ -22,7 +24,8 @@ export default class EditNote extends Component {
       this.noteService = new NoteService();
       this.noteService
         .showEditDetails(this.props.history.location.pathname.split("/")[2])
-        .then((note) => this.setState({ ...this.state, note }));
+        .then((note) => this.setState({ ...this.state, note, title: note.title, noteText: note.noteText })
+        );
   }
 
   componentWillUnmount() {
@@ -53,6 +56,14 @@ export default class EditNote extends Component {
     this.setState({...this.state, [name]: value});
   }
 
+  onNoteTextChange = (text) => {
+    this.setState({
+      noteText: text
+    })
+  };
+
+  
+
   render() {
     if(this.state && this.state.redirect) {
       return <Redirect to="/notes" />
@@ -65,8 +76,9 @@ export default class EditNote extends Component {
     <div>
         <h2>Edit note</h2>
         <form onSubmit={this.handleFormSubmit}>
-         <input type="text" onChange={e => this.handleChange(e)} name="title" defaultValue={this.state.note.title} /><br/>
-          <textarea type="text" name="noteText" onChange={e => this.handleChange(e)} defaultValue={this.state.note.noteText} cols="60" rows="5" /><br/>
+         <input type="text" onChange={e => this.handleChange(e)} oninit name="title" defaultValue={this.state.note.title} /><br/>
+         <ReactQuill theme="snow" defaultValue={this.state.note.noteText} 
+                  onChange={this.onNoteTextChange}  />
           <input type="submit" value="Send"/>
         </form>
     </div>

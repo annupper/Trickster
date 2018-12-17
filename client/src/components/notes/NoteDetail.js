@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Moment from 'moment';
 import NoteService from './NoteService';
 import domtoimage from 'dom-to-image';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import "./notes.css"
 
 export default class NoteDetail extends Component {
@@ -61,23 +62,14 @@ export default class NoteDetail extends Component {
       <div>
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
-        <p>{this.state.note.noteText}</p>
+        <p>{ ReactHtmlParser(this.state.note.noteText) }</p>
         <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch}/>
         <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} />
       </div>
       :
       <p></p>;
 
-      const noteEditBody = this.state.note ?
-      <div>
-        <form>
-          <input type="text"  name="title" defaultValue={this.state.note.title}/><br/>
-          <textarea type="text" name="note" defaultValue={this.state.note.noteText} cols="60" rows="5" /><br/>
-          <input type="submit" value="Send"/>
-        </form>
-      </div>
-      :
-      <p></p>;
+      
     return (
 
       <div className="modifyNote">
