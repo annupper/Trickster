@@ -13,7 +13,7 @@ export default class ShowNotes extends Component {
 
     this.notes = [];
     this.noteService = new NoteService();
-    
+
     this.getNotes()
   }
 
@@ -25,7 +25,7 @@ export default class ShowNotes extends Component {
 
   delete = (id) => {
     this.noteService.deleteNote(id)
-    .then(()=> this.getNotes())
+      .then(() => this.getNotes())
   }
 
 
@@ -33,11 +33,12 @@ export default class ShowNotes extends Component {
 
 
     var notes = this.state.notes;
-    var noteList = notes.map( (note) =>{
+    var noteList = notes.map((note) => {
       let id = note._id
-      return <div key={note._id}>
-       <Link to={`/notes/${note._id}`}>{note.title}</Link>  <br/> <button onClick={()=> {this.delete(id)}}>Borrar</button> <br/> <Link to={`/edit/${note._id}`}>Edit</Link>
-        </div>;
+      return <div className="noteColor" key={note._id}>
+        <div className="showNoteTools"><button onClick={() => { this.delete(id) }}><i class="fa fa-trash" aria-hidden="true"></i></button> <br /> <Link to={`/edit/${note._id}`}><i class="fa fa-edit"></i></Link></div>
+        <Link to={`/notes/${note._id}`}>{note.title}</Link>
+      </div>;
     })
 
     return <div className="allNotes">{noteList}</div>

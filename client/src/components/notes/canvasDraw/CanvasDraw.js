@@ -9,7 +9,7 @@ export default class CanvasDrawComp extends React.Component {
     super()
     this.state = {
       color: "#ffc600",
-      width: 700,
+      width: 850,
       height: 400,
       brushRadius: 7,
       lazyRadius: 12,
@@ -46,11 +46,6 @@ export default class CanvasDrawComp extends React.Component {
               var node = document.getElementById('mySketch');
               domtoimage.toJpeg(node, { quality: 0.95 })
     .then((dataUrl) => {
-        /*console.log(dataUrl);
-          var link = document.createElement('a');
-          link.download = 'my-image-name.jpeg';
-          link.href = dataUrl;
-          link.click();*/
           this.props.onUpdate(dataUrl);
           this.setState({...this.state, sketch:dataUrl});
     });
@@ -60,21 +55,21 @@ export default class CanvasDrawComp extends React.Component {
               );
             }}
           >
-            Save
+            <i class="fa fa-save"></i>
           </button>
           <button
             onClick={() => {
               this.saveableCanvas.clear();
             }}
           >
-            Clear
+            <i class="fa fa-eraser"></i>
           </button>
           <button
             onClick={() => {
               this.saveableCanvas.undo();
             }}
           >
-            Undo
+            <i class="fa fa-undo"></i>
           </button>
           
         </div>

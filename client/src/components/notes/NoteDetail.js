@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
 import NoteService from './NoteService';
+import domtoimage from 'dom-to-image';
 import "./notes.css"
 
 export default class NoteDetail extends Component {
@@ -31,6 +32,28 @@ export default class NoteDetail extends Component {
     this.setState({...this.state, note: null})
  }
 
+ downloadImage = () => {
+  var node = document.getElementById('imageToSave');
+  domtoimage.toJpeg(node, { quality: 0.95 })
+  .then((dataUrl)=> {
+    var link = document.createElement('a');
+          link.download = 'my-image-name.jpeg';
+          link.href = dataUrl;
+          link.click();
+  })
+ }
+
+ downloadSketch = () => {
+  var node = document.getElementById('sketchToSave');
+  domtoimage.toJpeg(node, { quality: 0.95 })
+  .then((dataUrl)=> {
+    var link = document.createElement('a');
+          link.download = 'my-sketch-name.jpeg';
+          link.href = dataUrl;
+          link.click();
+  })
+ }
+
 
   render() {
     Moment.locale('es');
@@ -39,8 +62,8 @@ export default class NoteDetail extends Component {
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
         <p>{this.state.note.noteText}</p>
-        <img src={this.state.note.sketch} alt="" />
-        <img src={this.state.note.imgPath} alt="" />
+        <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch}/>
+        <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} />
       </div>
       :
       <p></p>;
