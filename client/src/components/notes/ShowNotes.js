@@ -28,16 +28,23 @@ export default class ShowNotes extends Component {
       .then(() => this.getNotes())
   }
 
+  getClass =(index) => {
+    let colorsClasses = ['noteLightBlue', 'noteCoral','noteLightgreen', 'noteFabada', 'noteYellow'];
+    
+    return colorsClasses[index%colorsClasses.length];
+  }
+
 
   render() {
 
 
     var notes = this.state.notes;
-    var noteList = notes.map((note) => {
+    var noteList = notes.map((note,index) => {
       let id = note._id
-      return <div className="noteColor" key={note._id}>
-        <div className="showNoteTools"><button onClick={() => { this.delete(id) }}><i class="fa fa-trash" aria-hidden="true"></i></button> <br /> <Link to={`/edit/${note._id}`}><i class="fa fa-edit"></i></Link></div>
+      return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
+        <div className="showNoteTools"><button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> <br /> <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link></div>
         <Link to={`/notes/${note._id}`}>{note.title}</Link>
+        <p>{note.noteText}</p>
       </div>;
     })
 

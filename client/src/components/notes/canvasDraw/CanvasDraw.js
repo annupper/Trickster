@@ -55,21 +55,21 @@ export default class CanvasDrawComp extends React.Component {
               );
             }}
           >
-            <i class="fa fa-save"></i>
+            <i className="fa fa-save"></i>
           </button>
           <button
             onClick={() => {
               this.saveableCanvas.clear();
             }}
           >
-            <i class="fa fa-eraser"></i>
+            <i className="fa fa-eraser"></i>
           </button>
           <button
             onClick={() => {
               this.saveableCanvas.undo();
             }}
           >
-            <i class="fa fa-undo"></i>
+            <i className="fa fa-undo"></i>
           </button>
           
         </div>
