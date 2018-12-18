@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import { Link } from 'react-router-dom';
+import ShareNote from './ShareNote';
+import NoteDetailPopup from './NoteDetailPopup';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import "./notes.css"
 
@@ -9,6 +11,7 @@ export default class ShowNotes extends Component {
     super(props);
     this.state = {
       notes: [],
+      open: false
     }
 
 
@@ -30,9 +33,16 @@ export default class ShowNotes extends Component {
   }
 
   getClass =(index) => {
-    let colorsClasses = ['noteLightBlue', 'noteCoral','noteLightgreen', 'noteFabada', 'noteYellow'];
+    let colorsClasses = ['noteLightBlue', 'noteCoral','noteLightgreen', 'noteFabada', 'noteYellow', 'noteAqua', 'noteFuxia'];
     
     return colorsClasses[index%colorsClasses.length];
+  }
+
+  openModal = () => {
+    this.setState({...this.state, open: true })
+  }
+  closeModal = () => {
+    this.setState({...this.state,  open: false })
   }
 
 
@@ -43,9 +53,13 @@ export default class ShowNotes extends Component {
     var noteList = notes.map((note,index) => {
       let id = note._id
       return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
-        <div className="showNoteTools"><button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> <br /> <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link></div>
-        <Link to={`/notes/${note._id}`}>{note.title}</Link>
-        <p>{ ReactHtmlParser(note.noteText) }</p>
+        <div className="showNoteTools">
+        <button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> 
+        <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link> 
+        <ShareNote noteId={note._id}/>
+        </div>
+        <NoteDetailPopup id={note._id} title={note.title}/>
+        <div>{ ReactHtmlParser(note.noteText) }</div>
       </div>;
     })
 

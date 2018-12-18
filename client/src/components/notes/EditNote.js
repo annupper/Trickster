@@ -73,7 +73,7 @@ export default class EditNote extends Component {
     //console.log(this.state.note.title);
 
     const editNoteForm = this.state.note ?
-    <div>
+    <div className="createNoteBox">
         <h2>Edit note</h2>
         <form onSubmit={this.handleFormSubmit}>
          <input type="text" onChange={e => this.handleChange(e)} oninit name="title" defaultValue={this.state.note.title} /><br/>
@@ -87,7 +87,7 @@ export default class EditNote extends Component {
 
     return (
       <div className="notes">
-        {editNoteForm}
+      {editNoteForm}
       </div>
     )
   }

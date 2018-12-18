@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import { Redirect } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 import ControlledPopup from "./popup/Popup.js";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
@@ -66,19 +66,18 @@ export default class CreateNote extends Component {
 
     return (
       <div className="notes">
+      <div className="createNoteBox">
         <h2>Create note</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label htmlFor="title">Title:</label><input type="text" onChange={e => this.handleChange(e)} name="title" /><br />
+          <label htmlFor="title">Title:</label><input type="text" onChange={e => this.handleChange(e)} name="title" autofocus="true"/><br />
           <ReactQuill theme="snow" value={this.state.noteText}
                   onChange={this.onNoteTextChange} />
-          <label>Photo</label>
           <input type="file" name="photo" onChange={e => this.handleChange(e)} />
           <input type="hidden" name="sketch" value={this.state.sketch} />
           <input type="submit" value="Send" />
-
         </form>
-        <ControlledPopup onUpdate={this.onUpdate} />
-        
+        <div className="noteTools"><Link to={`/notes`}><i className="fa fa-arrow-left" aria-hidden="true"></i></Link><ControlledPopup onUpdate={this.onUpdate} /></div>
+        </div>
       </div>
     )
   }

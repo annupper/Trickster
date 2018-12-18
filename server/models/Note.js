@@ -6,6 +6,7 @@ const noteSchema = new Schema({
   noteText: {type: String},
   sketch: {type: String},
   author: {type: Schema.Types.ObjectId, ref: 'User'},
+  sharedBy: {type: Schema.Types.ObjectId, ref: 'User'},
   imgName: {
     type: String,
     default: 'defaultProfile.png',

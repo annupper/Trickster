@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
+import {Link, withRouter} from "react-router-dom";
 
 export default class Login extends Component {
   constructor() {
@@ -20,7 +21,10 @@ export default class Login extends Component {
     const {username, password} = this.state;
 
     this.authService.login({username, password})
-    .then(user => this.props.getUser(user));
+    .then(user => {
+      this.props.getUser(user);
+    
+    });
   }
 
   handleChange = (e) => {
@@ -30,6 +34,7 @@ export default class Login extends Component {
   }
 
   render() {
+
     return (
       <div className="login">
         <h2>Login</h2>

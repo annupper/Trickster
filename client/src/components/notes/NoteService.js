@@ -28,6 +28,11 @@ class NoteService {
     .then(response => response.data);
   }
 
+  shareNoteDetails = (id, shareWith) => {
+    return this.service.post(`/share/${id}`, {shareWith:shareWith})
+    .then(response => response.data);
+  }
+
   createNote = (title, noteText, photo, sketch) => {
     const formData = new FormData();
     formData.append('photo', photo);

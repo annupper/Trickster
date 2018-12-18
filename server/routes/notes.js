@@ -28,22 +28,26 @@ noteRoutes.get("/edit/:id", (req, res) => {
 noteRoutes.post("/share/:id", (req, res) => {
   const noteId = req.params.id;
   Note.findById(noteId)
-  .then((noteFound) => {if
-    (noteFound.author === req.user.id){
-      const {recipient} = req.body;
-      const {title, noteText, sketch} = noteFound;
-  const newNote = new Note({
-    title,
-    noteText,
-    sketch,
-    author: recipient,
-    imgPath
-  });
+  .then((noteFound) => {
+    if (noteFound.author.toString() === req.user.id){
+      const {shareWith} = req.body;
+      const {title, noteText, sketch, imgPath } = noteFound;
 
-  newNote.save().then(note => res.json(note))
+      User.findOne({username:shareWith})
+      .then((user) => {
+        const newNote = new Note({
+          title,
+          noteText,
+          sketch,
+          author: user.id,
+          sharedBy: noteFound.author,
+          imgPath
+        });
+        newNote.save().then(note => res.json(note))
+      }).catch((err)=> console.log("error in share the note"));
     }
   })
-  .catch(err => console.log(`Here is the in NOTE/:id ${err}`));
+  .catch(err => console.log(`Here is the in SHARE/:id ${err}`));
 });
 
 noteRoutes.post("/edit", (req, res) => {

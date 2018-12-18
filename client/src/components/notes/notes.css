@@ -15,18 +15,26 @@ margin: 0 auto;
 .allNotes {
   display: flex;
 flex-direction: row;
+flex-wrap: wrap;
 }
 
 .allNotes .noteColor {
-  margin: 20px;
-  padding: 20px;
   border: 1px solid #dadce0;
   border-radius: 10px;
   font-family: 'Open Sans',Roboto,Arial,sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.5rem;
-  max-width: 400px;
+}
+
+.noteColor {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 20px;
+  padding: 20px;
+  max-height: 300px;
+  max-width: 300px;
 }
 
 .noteColor a {
@@ -37,6 +45,9 @@ flex-direction: row;
 .noteColor p {
   color: #202124;
   font-size: 0.8em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .noteColor a:hover {
@@ -47,6 +58,19 @@ flex-direction: row;
 .noteLightBlue {
   background-color: #add8e6;
 }
+
+.noteCoral {
+  background-color: #ff9966;
+}
+
+.noteAqua {
+  background-color: #b8ffd6;
+}
+
+.noteFuxia {
+  background-color: #f2a7ff;
+}
+
 
 .noteCoral {
   background-color: #ff9966;
@@ -86,6 +110,90 @@ a {
 
 .allNotes .noteColor:hover {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.ql-toolbar span {
+  background-color: transparent !important;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+}
+
+.ql-container.ql-snow {
+  border-left: none !important;
+  border-right: none !important;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.createNoteBox {
+  margin: 5% auto;
+  width: 70%;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+}
+
+input {
+  border-width: 0px;
+  outline: none;
+  margin: 3px;
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.quill {
+  margin: 30px;
+}
+
+.createNoteBox h2 {
+  margin: 30px;
+}
+
+.createNoteBox:hover{
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+input[type=file] {
+  cursor: pointer;
+  width: 180px;
+  height: 34px;
+  overflow: hidden;
+  border-bottom: none;
+}
+
+input[type=submit] {
+  cursor: pointer;
+  background: #39D2B4;
+  border-radius: 5px;
+}
+
+input[type=submit]:hover {
+  background: rgb(15, 43, 87);
+  color: rgb(255, 212, 188);
+}
+
+input[type=file]:before {
+  width: 158px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 32px;
+  content: 'Select your file';
+  display: inline-block;
+  background: white;
+  padding: 0 15px;
+  text-align: center;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.noteTools {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 
