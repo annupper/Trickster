@@ -204,4 +204,12 @@ input[type=file]::-webkit-file-upload-button {
   float: left;
 }
 
+.popup-overlay {
+  overflow-y: scroll;
+}
+
+code {
+  text-align: left !important;
+}
+
 

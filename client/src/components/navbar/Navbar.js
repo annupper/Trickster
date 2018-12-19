@@ -26,7 +26,7 @@ class Navbar extends React.Component {
     ) : (
       <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">ENOT</Link>
       </li>
       <li>
         <Link to="/">FAQ</Link>

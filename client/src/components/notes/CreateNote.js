@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import ControlledPopup from "./popup/Popup.js";
 import ReactQuill from 'react-quill';
+import SnippetPopup from './SnippetPopup';
 import 'react-quill/dist/quill.snow.css'; 
 import "./notes.css"
 
@@ -16,7 +17,9 @@ export default class CreateNote extends Component {
       title: '',
       photo: '',
       redirect: false,
-      sketch: ''
+      sketch: '',
+      snippet: { snippetContent: '', snippetLanguage: '' }
+      
     }
 
     this.noteService = new NoteService();
@@ -27,9 +30,9 @@ export default class CreateNote extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const { noteText, title, photo, sketch } = this.state;
+    const { noteText, title, photo, sketch, snippet } = this.state;
 
-    this.noteService.createNote(title, noteText, photo, sketch)
+    this.noteService.createNote(title, noteText, photo, sketch, snippet)
       .then(() => {
         this.setState({ ...this.state, redirect: true });
       })
@@ -48,6 +51,12 @@ export default class CreateNote extends Component {
   onUpdate = (popupSketch) => {
     this.setState({
       sketch: popupSketch
+    })
+  };
+
+  onSnippetUpdate = (snippetLanguage, snippetContent) => {
+    this.setState({
+      snippet: {snippetLanguage, snippetContent}
     })
   };
 
@@ -74,9 +83,14 @@ export default class CreateNote extends Component {
                   onChange={this.onNoteTextChange} />
           <input type="file" name="photo" onChange={e => this.handleChange(e)} />
           <input type="hidden" name="sketch" value={this.state.sketch} />
+          <input type="hidden" name="snippetLanguage" value={this.state.snippet.snippetLanguage} />
+          <input type="hidden" name="snippetContent" value={this.state.snippet.snippetContent} />
           <input type="submit" value="Send" />
         </form>
-        <div className="noteTools"><ControlledPopup onUpdate={this.onUpdate} /></div>
+        <div className="noteTools">
+        <ControlledPopup onUpdate={this.onUpdate} />
+        <SnippetPopup onSnippetUpdate={this.onSnippetUpdate} />
+        </div>
         </div>
       </div>
     )

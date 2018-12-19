@@ -84,13 +84,15 @@ noteRoutes.post("/edit", (req, res) => {
 noteRoutes.post("/note/createnote", uploadCloud.single("photo"), (req, res) =>{
   const author = req.user.id;
   const imgPath = req.file ? req.file.url : '';
-  const {title, noteText, sketch} = req.body;
+  const {title, noteText, sketch, snippetLanguage, snippetContent} = req.body;
   const newNote = new Note({
     title,
     noteText,
     sketch,
     author: author,
-    imgPath
+    imgPath,
+    snippetLanguage,
+    snippetContent
   });
 
   newNote.save().then(note => res.json(note))

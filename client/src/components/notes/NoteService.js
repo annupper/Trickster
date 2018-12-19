@@ -3,7 +3,7 @@ import axios from "axios";
 class NoteService {
   constructor() {
     this.service = axios.create({
-      baseURL: "http://localhost:5000/api/note",
+      baseURL: `${process.env.REACT_APP_API_URL}/note`,
       withCredentials: true
     })
   }
@@ -33,12 +33,14 @@ class NoteService {
     .then(response => response.data);
   }
 
-  createNote = (title, noteText, photo, sketch) => {
+  createNote = (title, noteText, photo, sketch, snippet) => {
     const formData = new FormData();
     formData.append('photo', photo);
     formData.append('title', title);
     formData.append('noteText', noteText);
     formData.append('sketch', sketch);
+    formData.append('snippetLanguage', snippet.snippetLanguage);
+    formData.append('snippetContent', snippet.snippetContent);
 
     return this.service.post('/note/createnote', formData, { headers: {
       "Content-Type": "multipart/form-data"

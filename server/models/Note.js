@@ -5,6 +5,8 @@ const noteSchema = new Schema({
   title: {type: String},
   noteText: {type: String},
   sketch: {type: String},
+  snippetLanguage: {type: String, enum: ['javascript', 'java', 'phyton', 'html']},
+  snippetContent: {type: String},
   author: {type: Schema.Types.ObjectId, ref: 'User'},
   sharedBy: {type: Schema.Types.ObjectId, ref: 'User'},
   imgName: {

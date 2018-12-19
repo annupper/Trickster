@@ -4,7 +4,9 @@ import NoteService from './NoteService';
 import domtoimage from 'dom-to-image';
 import Moment from 'moment';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import Highlight from 'react-highlight'
 import "./notes.css"
+import "../../../node_modules/highlight.js/styles/atelier-cave-dark.css"
 
 export default class NoteDetailPopup extends React.Component {
   constructor() {
@@ -67,8 +69,11 @@ export default class NoteDetailPopup extends React.Component {
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
         <p>{ ReactHtmlParser(this.state.note.noteText) }</p>
-        <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch}/>
-        <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} />
+        <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch}/><br/>
+        <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} /><br/>
+        <Highlight language={this.state.note.snippetLanguage}>
+         {this.state.note.snippetContent}
+        </Highlight>      
       </div>
       :
       <p></p>;
