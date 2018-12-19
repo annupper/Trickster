@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import NoteService from './NoteService';
 import domtoimage from 'dom-to-image';
 import Moment from 'moment';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import Highlight from 'react-highlight'
 import "./notes.css"
 import "../../../node_modules/highlight.js/styles/atelier-cave-dark.css"
@@ -11,23 +11,23 @@ import "../../../node_modules/highlight.js/styles/atelier-cave-dark.css"
 export default class NoteDetailPopup extends React.Component {
   constructor() {
     super()
-    this.state = { 
+    this.state = {
       open: false,
       note: null
-    
+
     }
     this.noteService = new NoteService();
   }
 
   componentDidMount() {
-      this.noteService
-        .showNoteDetails(this.props.id)
-        .then((note) => this.setState({ ...this.state, note }));
+    this.noteService
+      .showNoteDetails(this.props.id)
+      .then((note) => this.setState({ ...this.state, note }));
   }
 
   componentWillUnmount() {
-    this.setState({...this.state, note: null})
- }
+    this.setState({ ...this.state, note: null })
+  }
 
   openModal = () => {
     this.setState({ open: true })
@@ -39,24 +39,24 @@ export default class NoteDetailPopup extends React.Component {
   downloadImage = () => {
     var node = document.getElementById('imageToSave');
     domtoimage.toJpeg(node, { quality: 0.95 })
-    .then((dataUrl)=> {
-      var link = document.createElement('a');
-            link.download = 'my-image-name.jpeg';
-            link.href = dataUrl;
-            link.click();
-    })
-   }
-  
-   downloadSketch = () => {
+      .then((dataUrl) => {
+        var link = document.createElement('a');
+        link.download = 'my-image-name.jpeg';
+        link.href = dataUrl;
+        link.click();
+      })
+  }
+
+  downloadSketch = () => {
     var node = document.getElementById('sketchToSave');
     domtoimage.toJpeg(node, { quality: 0.95 })
-    .then((dataUrl)=> {
-      var link = document.createElement('a');
-            link.download = 'my-sketch-name.jpeg';
-            link.href = dataUrl;
-            link.click();
-    })
-   }
+      .then((dataUrl) => {
+        var link = document.createElement('a');
+        link.download = 'my-sketch-name.jpeg';
+        link.href = dataUrl;
+        link.click();
+      })
+  }
 
   render() {
 
@@ -64,16 +64,16 @@ export default class NoteDetailPopup extends React.Component {
     const noteBody = this.state.note ?
       <div>
         <button className="button leftButton" onClick={this.closeModal}>
-        <i className="fa fa-arrow-left" aria-hidden="true"></i>
+          <i className="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
-        <p>{ ReactHtmlParser(this.state.note.noteText) }</p>
-        <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch}/><br/>
-        <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} /><br/>
+        <p>{ReactHtmlParser(this.state.note.noteText)}</p>
+        <img id="sketchToSave" src={this.state.note.sketch} alt="" onClick={this.downloadSketch} /><br />
+        <img id="imageToSave" src={this.state.note.imgPath} alt="" onClick={this.downloadImage} /><br />
         <Highlight language={this.state.note.snippetLanguage}>
-         {this.state.note.snippetContent}
-        </Highlight>      
+          {this.state.note.snippetContent}
+        </Highlight>
       </div>
       :
       <p></p>;
