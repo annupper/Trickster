@@ -61,6 +61,9 @@ export default class NoteDetailPopup extends React.Component {
     Moment.locale('es');
     const noteBody = this.state.note ?
       <div>
+        <button className="button leftButton" onClick={this.closeModal}>
+        <i className="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
         <h3>{this.state.note.title}</h3>
         <p>{Moment(this.state.note.created_at).format('D MMM')}</p>
         <p>{ ReactHtmlParser(this.state.note.noteText) }</p>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteService from './NoteService';
 import {Redirect} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import "./notes.css"
@@ -74,9 +75,11 @@ export default class EditNote extends Component {
 
     const editNoteForm = this.state.note ?
     <div className="createNoteBox">
+    <Link className="leftButton" to={`/notes`}><i className="fa fa-arrow-left" aria-hidden="true"></i></Link>
         <h2>Edit note</h2>
         <form onSubmit={this.handleFormSubmit}>
-         <input type="text" onChange={e => this.handleChange(e)} oninit name="title" defaultValue={this.state.note.title} /><br/>
+        <label htmlFor="title">Title:</label>
+         <input type="text" className="createNoteTitle" onChange={e => this.handleChange(e)} oninit name="title" defaultValue={this.state.note.title} /><br/>
          <ReactQuill theme="snow" defaultValue={this.state.note.noteText} 
                   onChange={this.onNoteTextChange}  />
           <input type="submit" value="Send"/>

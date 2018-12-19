@@ -132,7 +132,7 @@ a {
   width: 70%;
   border-radius: 10px;
   background-color: white;
-  padding: 10px;
+  padding: 15px;
 }
 
 input {
@@ -194,6 +194,14 @@ input[type=file]::-webkit-file-upload-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.createNoteTitle {
+  width: 70%;
+}
+
+.leftButton {
+  float: left;
 }
 
 
