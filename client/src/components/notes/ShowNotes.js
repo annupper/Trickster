@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import NoteService from './NoteService';
 import { Link } from 'react-router-dom';
 import ShareNote from './ShareNote';
@@ -6,7 +6,7 @@ import NoteDetailPopup from './NoteDetailPopup';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import "./notes.css"
 
-export default class ShowNotes extends Component {
+export default class ShowNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
