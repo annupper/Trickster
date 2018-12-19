@@ -49,19 +49,23 @@ export default class ShowNotes extends Component {
   render() {
 
 
-    var notes = this.state.notes;
-    var noteList = notes.map((note,index) => {
-      let id = note._id
-      return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
-        <div className="showNoteTools">
-        <button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> 
-        <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link> 
-        <ShareNote noteId={note._id}/>
-        </div>
-        <NoteDetailPopup id={note._id} title={note.title}/>
-        <div>{ ReactHtmlParser(note.noteText) }</div>
-      </div>;
-    })
+    if(this.state.notes){
+
+      var notes = this.state.notes;
+      var noteList = notes.map((note,index) => {
+        let id = note._id
+        return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
+          <div className="showNoteTools">
+          <button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> 
+          <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link> 
+          <ShareNote noteId={note._id}/>
+          </div>
+          <NoteDetailPopup id={note._id} title={note.title}/>
+          <div>{ ReactHtmlParser(note.noteText) }</div>
+        </div>;
+      })
+
+    }
 
     return <div className="allNotes">{noteList}</div>
   }
