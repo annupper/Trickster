@@ -31,6 +31,7 @@ mongoose
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
+  app.use(express.static(path.join(__dirname,"public")));
   
   
   // Enable authentication using session + passport
@@ -44,7 +45,7 @@ mongoose
       
   app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'http://localhost:5000'],
   }));
   
   app.use('/', require('./routes/index'));
