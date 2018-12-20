@@ -1,5 +1,6 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
+import "./popup/popup.css"
 
 export default class SnippetPopup extends React.Component {
   constructor(props) {
@@ -47,12 +48,15 @@ export default class SnippetPopup extends React.Component {
         >
           <div className="popupStyle">
           <h2>Add snippet</h2>
+          <div className="select">
           <select onChange={e => this.handleChange(e)} name="snippetLanguage">
             <option selected="selected" value="javascript">JavaScript</option>
             <option value="java">Java</option>
             <option value="python">Python</option>
             <option value="html">HTML</option>
           </select>
+          </div>
+
           <textarea onChange={e => this.handleChange(e)} name="snippetContent"></textarea>
           <button onClick={this.saveSnippet}>Save</button>
           </div>

@@ -49,10 +49,13 @@ export default class ShareNote extends React.Component {
           onClose={this.closeModal}
         >
           <div className="popupStyle">
-          <h2>With whoom do you want to share the note?</h2>
+          <button className="button leftButton" onClick={this.closeModal}>
+          <i className="fa fa-arrow-left" aria-hidden="true"></i>
+          </button>
+          <h2>With whom do you want to share the note?</h2>
         <form onSubmit={this.handlePersonToShareNote}>
          <input type="text" onChange={e => this.handleChange(e)} name="shareWith" /><br />
-          <input type="submit" value="Send" />
+          <input type="submit" value="Send"/>
 
         </form>
           </div>
