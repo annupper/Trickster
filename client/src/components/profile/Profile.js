@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import "./profile.css"
+import {Redirect} from "react-router-dom";
+import "./profile.css";
 
 export default class ShowNotes extends Component {
+
   render() {
+    if(!this.props.user) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="profile">
         <div className="userNamePhoto">

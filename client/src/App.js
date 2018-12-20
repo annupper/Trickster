@@ -10,6 +10,7 @@ import Profile from "./components/profile/Profile";
 import CreateNote from "./components/notes/CreateNote";
 import EditNote from "./components/notes/EditNote";
 import HomeBody from "./components/homeBody/HomeBody";
+import HomeInfo from "./components/homeBody/HomeInfo";
 import NoteService from "./components/notes/NoteService";
 import AuthService from "./components/auth/AuthService";
 import { Route, Switch } from "react-router-dom";
@@ -63,6 +64,7 @@ class App extends Component {
         <Route exact
           path="/signup"
           render={() => <Signup getUser={this.getUser} />}/>
+          <Route exact path="/faq" render={() => <HomeInfo />} />
         <Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
         <Route exact path="/notes" render={() => <Notes showNotes={this.showNotes}/>} />
         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />

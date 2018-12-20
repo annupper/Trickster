@@ -8,14 +8,14 @@ class Navbar extends React.Component {
 
     const responsiveNav = this.props.user ? (
       <div className="nav-links">
-        <Link to="/">FAQ</Link>
+        <Link to="/faq">FAQ</Link>
         <Link to="/notes">Notes</Link>
         <Link to="/profile">Profile</Link>
         <div className="navLink" onClick={this.props.logout}>Logout</div>
       </div>
     ) : (
         <div className="nav-links">
-          <Link to="/">FAQ</Link>
+          <Link to="/faq">FAQ</Link>
           <Link to="/signup">Signup</Link>
           <Link to="/login">Login</Link>
         </div>
