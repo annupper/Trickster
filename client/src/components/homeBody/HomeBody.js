@@ -23,7 +23,41 @@ class HomeBody extends React.Component {
           <p>Un solo lugar para tus notas, ideas, listas y recordatorios.</p>
         </div>
         </div>
+
+
+        <h3>4 Columns</h3>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="box">
+        <p>class="col-xs-12 col-sm-6 col-md-3"</p>
       </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="box">
+        <p>class="col-xs-12 col-sm-6 col-md-3"</p>
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="box">
+        <p>class="col-xs-12 col-sm-6 col-md-3"</p>
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="box">
+        <p>class="col-xs-12 col-sm-6 col-md-3"</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+      </div>
+
+      
  
     )
   }

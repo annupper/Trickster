@@ -1,0 +1,13 @@
+.login input[type=text], .login input[type=password], .signup input[type=text], .signup input[type=password]  {
+  width: 400px;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+.login input[type=submit], .signup input[type=submit] {
+  width: 150px;
+}
+
+.login, .signup {
+  margin-top: 5%;
+}

@@ -8,10 +8,10 @@ export default class CanvasDrawComp extends React.Component {
   constructor() {
     super()
     this.state = {
-      color: "#ffc600",
+      color: "#18202e",
       width: 850,
       height: 400,
-      brushRadius: 7,
+      brushRadius: 3,
       lazyRadius: 12,
       sketch: ''
     };
@@ -21,7 +21,7 @@ export default class CanvasDrawComp extends React.Component {
     // let's change the color randomly every 2 seconds. fun!
     window.setInterval(() => {
       this.setState({...this.state,
-        color: "#" + Math.floor(Math.random() * 16777215).toString(16)
+        color: "#18202e" /*+ Math.floor(Math.random() * 16777215).toString(16)*/
       });
     }, 2000);
   }

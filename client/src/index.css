@@ -4,8 +4,8 @@ body {
   font-family: 'Open Sans',-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    color: #828286;
-    font-weight: 600;
+    color: #6d6d6e;
+    font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,7 +24,7 @@ button {
 }
 
 .fa {
-  color: #828286;
+  color: #a0a0a0;
 }
 
 .fa:hover {

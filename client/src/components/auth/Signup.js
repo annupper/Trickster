@@ -39,16 +39,13 @@ export default class Signup extends Component {
     }
 
     return (
-      <div>
+      <div className="signup">
         <h2>Signup</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username</label>
-          <input type="text" name="username" onChange={e => this.handleChange(e)} />
+        <input type="text" name="username" onChange={e => this.handleChange(e)} placeholder="Username"/><br/>
+        <input type="password" name="password" onChange={e => this.handleChange(e)} placeholder="Password"/><br/>
 
-          <label>Password</label>
-          <input type="password" name="password" onChange={e => this.handleChange(e)} />
-
-          <input type="submit" value="Signup"/>
+        <input type="submit" value="Signup"/>
         </form>
       </div>
     )

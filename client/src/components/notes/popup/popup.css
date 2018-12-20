@@ -4,4 +4,13 @@
   border-radius: 10px;
   min-width: 30% !important;
   max-width: 65% !important;
+  background-color: #efecf4 !important;
+}
+
+.popup-content .noteDetailInPopup img {
+  max-width: 200px;
+  height: auto;
+}
+.nav-title a:hover {
+  color: #39D2B4;
 }

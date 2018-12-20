@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import NoteService from './NoteService';
 import { Link } from 'react-router-dom';
 import ShareNote from './ShareNote';
@@ -32,41 +32,48 @@ export default class ShowNotes extends React.Component {
       .then(() => this.getNotes())
   }
 
-  getClass =(index) => {
-    let colorsClasses = ['noteLightBlue', 'noteCoral','noteLightgreen', 'noteFabada', 'noteYellow', 'noteAqua', 'noteFuxia'];
-    
-    return colorsClasses[index%colorsClasses.length];
+  getClass = (index) => {
+    let colorsClasses = ['noteLightBlue', 'noteCoral', 'noteLightgreen', 'noteFabada', 'noteYellow', 'noteAqua', 'noteFuxia'];
+
+    return colorsClasses[index % colorsClasses.length];
   }
 
   openModal = () => {
-    this.setState({...this.state, open: true })
+    this.setState({ ...this.state, open: true })
   }
   closeModal = () => {
-    this.setState({...this.state,  open: false })
+    this.setState({ ...this.state, open: false })
   }
 
 
   render() {
 
 
-    if(this.state.notes){
+    if (this.state.notes) {
 
       var notes = this.state.notes;
-      var noteList = notes.map((note,index) => {
+      var noteList = notes.map((note, index) => {
         let id = note._id
-        return <div className={`noteColor ${this.getClass(index)}`} key={note._id}>
+        return <div className={`noteBoxResponsive col-xs-12 col-sm-6 col-md-2 ${this.getClass(index)}`} key={note._id}>
           <div className="showNoteTools">
-          <button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button> 
-          <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link> 
-          <ShareNote noteId={note._id}/>
+            <button onClick={() => { this.delete(id) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
+            <Link to={`/edit/${note._id}`}><i className="fa fa-edit"></i></Link>
+            <ShareNote noteId={note._id} />
           </div>
-          <NoteDetailPopup id={note._id} title={note.title}/>
-          <div>{ ReactHtmlParser(note.noteText) }</div>
+          <NoteDetailPopup id={note._id} title={note.title} />
+          <div>{ReactHtmlParser(note.noteText)}</div>
         </div>;
       })
 
     }
 
-    return <div className="allNotes">{noteList}</div>
+    return  <div className="container">
+        <div className="row">
+          {noteList}
+
+
+        </div>
+      </div>
+
   }
 }

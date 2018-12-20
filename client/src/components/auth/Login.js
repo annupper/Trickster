@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import {Link, withRouter} from "react-router-dom";
+import {Redirect} from "react-router-dom";
+import "./auth.css"
 
 export default class Login extends Component {
   constructor() {
@@ -23,7 +25,7 @@ export default class Login extends Component {
     this.authService.login({username, password})
     .then(user => {
       this.props.getUser(user);
-    
+      this.setState({...this.state, redirect: true})
     });
   }
 
@@ -34,16 +36,16 @@ export default class Login extends Component {
   }
 
   render() {
+    if(this.state && this.state.redirect) {
+      return <Redirect to="/notes" />
+    }
 
     return (
       <div className="login">
         <h2>Login</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username</label>
-          <input type="text" name="username" onChange={e => this.handleChange(e)} />
-
-          <label>Password</label>
-          <input type="password" name="password" onChange={e => this.handleChange(e)} />
+          <input type="text" name="username" onChange={e => this.handleChange(e)} placeholder="Username"/><br/>
+          <input type="password" name="password" onChange={e => this.handleChange(e)} placeholder="Password"/><br/>
 
           <input type="submit" value="Login"/>
         </form>

@@ -5,8 +5,9 @@ import domtoimage from 'dom-to-image';
 import Moment from 'moment';
 import ReactHtmlParser from 'react-html-parser';
 import Highlight from 'react-highlight'
-import "./notes.css"
-import "../../../node_modules/highlight.js/styles/atelier-cave-dark.css"
+import "./notes.css";
+import "./popup/popup.css";
+import "../../../node_modules/highlight.js/styles/atelier-cave-light.css"
 
 export default class NoteDetailPopup extends React.Component {
   constructor() {
@@ -62,7 +63,7 @@ export default class NoteDetailPopup extends React.Component {
 
     Moment.locale('es');
     const noteBody = this.state.note ?
-      <div>
+      <div className="noteDetailInPopup">
         <button className="button leftButton" onClick={this.closeModal}>
           <i className="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
@@ -79,7 +80,7 @@ export default class NoteDetailPopup extends React.Component {
       <p></p>;
 
     return (
-      <div>
+      <div className="showNoteTitle">
         <button className="button" onClick={this.openModal}>
           {this.props.title}
         </button>

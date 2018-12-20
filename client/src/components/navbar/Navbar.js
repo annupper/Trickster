@@ -5,48 +5,43 @@ import { Link } from 'react-router-dom'
 class Navbar extends React.Component {
 
   render() {
-    const navbar = this.props.user ? (
-      <ul>
-      <li>
-        <Link to="/">ENOT</Link>
-      </li>
-      <li>
-        <Link to="/">FAQ</Link>
-      </li>
-      <li>
-        <Link to="/notes">Notes</Link>
-      </li>
-      <li>
-        <Link to="/profile">Profile</Link>
-      </li>
-      <li>
-        <p onClick={this.props.logout}>Logout</p>
-      </li>
-    </ul>
-    ) : (
-      <ul>
-      <li>
-        <Link to="/">ENOT</Link>
-      </li>
-      <li>
-        <Link to="/">FAQ</Link>
-      </li>
-      <li>
-        <Link to="/signup">Signup</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
-    );
 
-    return (
-    
-      <div className="navbarStyle">
-        {navbar}
-        <hr/>
+    const responsiveNav = this.props.user ? (
+      <div className="nav-links">
+        <Link to="/">FAQ</Link>
+        <Link to="/notes">Notes</Link>
+        <Link to="/profile">Profile</Link>
+        <div className="navLink" onClick={this.props.logout}>Logout</div>
       </div>
- 
+    ) : (
+        <div className="nav-links">
+          <Link to="/">FAQ</Link>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
+        </div>
+      )
+      
+    return (
+
+      <div className="navbarStyle">
+        <div className="nav">
+          <div className="nav-header">
+            <div className="nav-title">
+              <Link to="/">ENOT</Link>
+            </div>
+          </div>
+          <div className="nav-btn">
+            <label for="nav-check">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </div>
+          <input type="checkbox" id="nav-check" />
+          {responsiveNav}
+        </div>
+      </div>
+
     )
   }
 };

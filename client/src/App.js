@@ -20,7 +20,8 @@ class App extends Component {
     super();
 
     this.state = {
-      user: null
+      user: null,
+      redirect: false
     };
 
     this.noteService = new NoteService();
@@ -42,10 +43,14 @@ class App extends Component {
   logout = () => {
     this.authService
       .logout()
-      .then(() => this.setState({ ...this.state, user: null }));
+      .then(() => this.setState({ ...this.state, user: null, redirect: true }));
   };
 
   render() {
+  
+    if(this.state && this.state.redirect) {
+      return <App />
+    }
     
     return (
       <div className="App">
