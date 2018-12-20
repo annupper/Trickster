@@ -68,7 +68,6 @@ select::-ms-expand {
   right: 0;
   bottom: 0;
   padding: 0 1em;
-  background: #39D2B4;
   pointer-events: none;
 }
 /* Transition */
@@ -103,5 +102,18 @@ select::-ms-expand {
   line-height: 1.4em;
   padding: 5px 8px;
   transition: background-color 0.2s ease 0s;
+}
+
+.popupStyle .saveButton {
+  cursor: pointer;
+  background: #39D2B4;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 10px;
+}
+
+.popupStyle .saveButton:hover {
+  background: rgb(15, 43, 87);
+  color: rgb(255, 212, 188);
 }
 

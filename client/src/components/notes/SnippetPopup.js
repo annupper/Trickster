@@ -47,6 +47,9 @@ export default class SnippetPopup extends React.Component {
           onClose={this.closeModal}
         >
           <div className="popupStyle">
+          <button className="button leftButton" onClick={this.closeModal}>
+          <i className="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
           <h2>Add snippet</h2>
           <div className="select">
           <select onChange={e => this.handleChange(e)} name="snippetLanguage">
@@ -57,8 +60,8 @@ export default class SnippetPopup extends React.Component {
           </select>
           </div>
 
-          <textarea onChange={e => this.handleChange(e)} name="snippetContent"></textarea>
-          <button onClick={this.saveSnippet}>Save</button>
+          <textarea onChange={e => this.handleChange(e)} name="snippetContent"></textarea><br/>
+          <button className="saveButton" onClick={this.saveSnippet}>Save</button>
           </div>
         </Popup>
       </div>
